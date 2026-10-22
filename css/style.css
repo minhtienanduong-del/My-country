@@ -1,0 +1,293 @@
+:root {
+  --ink: #1d2b2a;        /* text on light backgrounds */
+  --leaf: #1f6b45;       /* primary green */
+  --leaf-dark: #14472e;
+  --tulip: #a8205a;      /* accent */
+  --lake: #1b5e8c;       /* secondary accent */
+  --mist: #f2f7f4;       /* page background */
+  --white: #ffffff;
+  --radius: 0.75rem;
+}
+
+/* Box model: width/height include padding and border */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background-color: var(--mist);
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.2;
+  color: var(--leaf-dark);
+}
+
+h1 { font-size: 2.6rem; margin: 0 0 1rem; }
+h2 { font-size: 1.8rem; margin: 0 0 0.75rem; }
+h3 { font-size: 1.3rem; margin: 0 0 0.5rem; }
+
+p { margin: 0 0 1rem; max-width: 70ch; }
+
+a { color: var(--lake); text-underline-offset: 0.2em; }
+a:hover { color: var(--tulip); }
+
+/* ---------- 2. Skip link: hidden until it receives keyboard focus ---------- */
+.skip-link {
+  position: absolute;
+  top: -4rem;                 /* off-screen by default */
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--tulip);
+  color: var(--white);
+  font-weight: 700;
+  border-radius: 0 0 var(--radius) var(--radius);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;                     /* slides into view when focused */
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ---------- 3. Header & navigation (flexbox) ---------- */
+.site-header {
+  background-color: var(--leaf);
+  color: var(--white);
+  border-bottom: 6px solid var(--tulip);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+}
+
+.logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.logo:hover { color: var(--white); text-decoration: underline; }
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav a {
+  display: block;
+  padding: 0.6rem 1.1rem;
+  border: 2px solid transparent;
+  border-radius: 2rem;
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.main-nav a:hover {
+  background-color: var(--leaf-dark);
+  border-color: var(--white);
+  color: var(--white);
+}
+
+/* Current page indicator (set with aria-current="page" in the HTML) */
+.main-nav a[aria-current="page"] {
+  background-color: var(--white);
+  color: var(--leaf-dark);
+}
+
+/* Clear keyboard focus on every interactive element */
+a:focus-visible {
+  outline: 3px solid var(--tulip);
+  outline-offset: 3px;
+}
+
+.main-nav a:focus-visible,
+.logo:focus-visible {
+  outline-color: var(--white);
+}
+
+/* ---------- 4. Layout (CSS grid) ---------- */
+main {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem;
+  background-color: var(--white);
+  border: 2px solid var(--leaf);
+  border-radius: var(--radius);
+}
+
+.hero-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-art svg {
+  width: 100%;
+  max-width: 12rem;
+  height: auto;
+}
+
+/* Three equal columns that wrap automatically */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+/* Two-column layout: article + sidebar */
+.two-col {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* ---------- 5. Cards, table, buttons (box model) ---------- */
+.card {
+  display: flex;                 /* flex used inside a grid item */
+  flex-direction: column;
+  padding: 1.5rem;
+  margin: 0;
+  background-color: var(--white);
+  border: 2px solid #c9ddd1;
+  border-top: 8px solid var(--tulip);
+  border-radius: var(--radius);
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+.card--lake { border-top-color: var(--lake); }
+.card--leaf { border-top-color: var(--leaf); }
+
+.sidebar {
+  align-self: start;
+  padding: 1.5rem;
+  background-color: var(--leaf-dark);
+  color: var(--white);
+  border-radius: var(--radius);
+}
+
+.sidebar h2,
+.sidebar h3 { color: var(--white); }
+
+.sidebar a { color: var(--white); }
+.sidebar a:hover { color: #ffd6e8; }
+.sidebar a:focus-visible { outline-color: var(--white); }
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+  background-color: var(--tulip);
+  border: 2px solid var(--tulip);
+  border-radius: 2rem;
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--white);
+  color: var(--tulip);
+}
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--white);
+}
+
+caption {
+  padding: 0.75rem 0;
+  font-weight: 700;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  border: 2px solid #c9ddd1;
+  text-align: left;
+}
+
+thead th {
+  background-color: var(--leaf);
+  color: var(--white);
+}
+
+tbody th { background-color: #e3efe7; }
+
+/* ---------- 6. Footer ---------- */
+.site-footer {
+  padding: 1.5rem;
+  background-color: var(--ink);
+  color: var(--white);
+  text-align: center;
+}
+
+.site-footer p { margin: 0 auto; }
+.site-footer a { color: var(--white); }
+.site-footer a:focus-visible { outline-color: var(--white); }
+
+/* ---------- 7. Responsive & accessibility ---------- */
+@media (max-width: 48rem) {
+  h1 { font-size: 2rem; }
+
+  .hero,
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .hero { padding: 1.5rem; }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+body {
+  background-color: #eaf6ef;
+  color: #1d2b2a;
+}
